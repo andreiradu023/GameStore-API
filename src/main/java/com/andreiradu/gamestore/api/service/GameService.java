@@ -1,5 +1,6 @@
 package com.andreiradu.gamestore.api.service;
 
+import com.andreiradu.gamestore.api.exception.ResourceNotFoundException;
 import com.andreiradu.gamestore.api.model.Game;
 import com.andreiradu.gamestore.api.repository.GameRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,8 @@ public class GameService {
     private final GameRepository gameRepository;
 
     public Game getGameById(Long id) {
-        return gameRepository.findById(id).get();
+        return gameRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("game not found with id: " + id));
     }
 
     public List<Game> getAllGames() {
@@ -30,10 +32,11 @@ public class GameService {
         existingGame.setTitle(updatedGame.getTitle());
         existingGame.setPlatform(updatedGame.getPlatform());
         existingGame.setGenre(updatedGame.getGenre());
+        existingGame.setDescription(updatedGame.getDescription());
         existingGame.setPrice(updatedGame.getPrice());
         existingGame.setImage(updatedGame.getImage());
-        existingGame.setStockQuantity(updatedGame.getStockQuantity());
         existingGame.setReleaseDate(updatedGame.getReleaseDate());
+        existingGame.setStockQuantity(updatedGame.getStockQuantity());
         return gameRepository.save(existingGame);
     }
 

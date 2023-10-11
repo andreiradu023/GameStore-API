@@ -39,14 +39,13 @@ public class CartItemController {
 
     @PutMapping("/update/{gameId}/{quantity}/{email}")
     public String updateGameQuantity(@PathVariable long gameId, @PathVariable short quantity,
-                                        @PathVariable String email) {
+                                     @PathVariable String email) {
         User user = userService.findUserByEmail(email);
         return cartItemService.updateGameQuantity(user, gameId, quantity);
     }
 
-    @DeleteMapping("/remove/{gameId}")
-    public String removeGameFromCart(@PathVariable long gameId, @PathVariable short quantity,
-                                     String email) {
+    @DeleteMapping("/remove/{gameId}/{email}")
+    public String removeGameFromCart(@PathVariable long gameId, @PathVariable String email) {
         User user = userService.findUserByEmail(email);
         return cartItemService.removeGameFromCart(user, gameId);
     }

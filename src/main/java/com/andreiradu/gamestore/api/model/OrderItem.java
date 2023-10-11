@@ -1,5 +1,6 @@
 package com.andreiradu.gamestore.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Formula;
 
 import java.math.BigDecimal;
 
@@ -25,6 +25,7 @@ public class OrderItem {
     @Column(name = "id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order orderId;
@@ -39,8 +40,7 @@ public class OrderItem {
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
 
-    @Column(name = "subtotal")
-    @Formula("unit_price * quantity")
-    private BigDecimal subtotal;
+    @Column(name = "subtotal", insertable = false, updatable = false)
+    private float subtotal;
 
 }

@@ -2,8 +2,8 @@ package com.andreiradu.gamestore.api.service;
 
 import com.andreiradu.gamestore.api.exception.CartItemException;
 import com.andreiradu.gamestore.api.model.CartItem;
-import com.andreiradu.gamestore.api.model.User;
 import com.andreiradu.gamestore.api.model.Game;
+import com.andreiradu.gamestore.api.model.User;
 import com.andreiradu.gamestore.api.repository.CartItemRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;

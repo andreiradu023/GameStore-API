@@ -15,7 +15,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User getUserById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("user not found with id: " + id));
     }
 
     public List<User> getAllUser() {
