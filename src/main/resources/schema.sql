@@ -9,7 +9,19 @@ CREATE TABLE `users`(
                       `email` VARCHAR(100) NOT NULL,
                       `phone` VARCHAR(15) NOT NULL,
                       `address` VARCHAR(200) NOT NULL,
+                      `password` VARCHAR(64) NOT NULL,
                        PRIMARY KEY (`id`));
+
+CREATE TABLE `roles` (
+                         `id` BIGINT NOT NULL AUTO_INCREMENT,
+                         `name` VARCHAR(15) NOT NULL,
+                         PRIMARY KEY (`id`));
+
+CREATE TABLE `users_roles` (
+                               `user_id` BIGINT NOT NULL,
+                               `role_id` BIGINT NOT NULL,
+                               FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                               FOREIGN KEY (role_id) REFERENCES roles(id));
 
 CREATE TABLE `games` (
                          `id` BIGINT NOT NULL AUTO_INCREMENT,
