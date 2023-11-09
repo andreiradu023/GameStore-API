@@ -8,6 +8,10 @@ import com.andreiradu.gamestore.api.model.OrderItem;
 import com.andreiradu.gamestore.api.model.User;
 import com.andreiradu.gamestore.api.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -46,7 +50,7 @@ public class OrderService {
         orderRepository.deleteById(orderId);
     }
 
-    public Order createOrder(User user, List<CartItem> cartItems) {
+    public void createOrder(User user, List<CartItem> cartItems) {
         Order newOrder = new Order();
         newOrder.setUser(user);
         newOrder.setTotalPrice(calculateTotal(cartItems));
@@ -67,7 +71,7 @@ public class OrderService {
         }
         newOrder.setOrderItems(orderItems);
 
-        return orderRepository.save(newOrder);
+        orderRepository.save(newOrder);
     }
 
     private float calculateTotal(List<CartItem> cartItems) {
@@ -76,5 +80,21 @@ public class OrderService {
             total += cartItem.getSubtotal();
         }
         return total;
+    }
+
+    public Page<Order> findAllByPage(int pageNum, int pageSize, String sortField, String sortDir, String keyword) {
+        Sort sort = Sort.by(sortField);
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+
+        if (pageNum < 1) pageNum = 1;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
+
+        Page<Order> page;
+        if (keyword != null && !keyword.isEmpty()) {
+            page = orderRepository.findAllByUser(keyword, pageable);
+        } else {
+            page = orderRepository.findAll(pageable);
+        }
+        return page;
     }
 }

@@ -3,6 +3,7 @@ package com.andreiradu.gamestore.api.controller;
 import com.andreiradu.gamestore.api.model.Game;
 import com.andreiradu.gamestore.api.service.GameService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,6 +28,15 @@ public class GameController {
     @GetMapping
     public ResponseEntity<List<Game>> getAllGames() {
         return ResponseEntity.ok(gameService.getAllGames());
+    }
+
+    @GetMapping("/page/{pageNum}")
+    public Page<Game> findAllByPage(@PathVariable int pageNum,
+                                    @RequestParam(defaultValue = "5") int pageSize,
+                                    @RequestParam(defaultValue = "id") String sortField,
+                                    @RequestParam(defaultValue = "asc") String sortDir,
+                                    @RequestParam(defaultValue = "") String keyword) {
+        return gameService.findAllByPage(pageNum, pageSize, sortField, sortDir, keyword);
     }
 
     @GetMapping("/{gameId}")

@@ -4,10 +4,11 @@ import com.andreiradu.gamestore.api.model.User;
 import com.andreiradu.gamestore.api.service.CheckoutService;
 import com.andreiradu.gamestore.api.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("api/v1/checkout")
@@ -18,9 +19,9 @@ public class CheckoutController {
 
     private final UserService userService;
 
-    @PostMapping("{email}")
-    private String placeOrder(@PathVariable String email) {
-        User user = userService.findUserByEmail(email);
-        return checkoutService.placeOrder(user);
+    @PostMapping()
+    private void placeOrder(Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        checkoutService.placeOrder(user);
     }
 }

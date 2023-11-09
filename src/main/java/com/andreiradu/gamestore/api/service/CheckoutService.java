@@ -15,14 +15,10 @@ public class CheckoutService {
 
     private final CartItemService cartItemService;
 
-    public String placeOrder(User user) {
+    public void placeOrder(User user) {
         List<CartItem> cartItem = cartItemService.findCartItemByUser(user);
-        if (cartItem.isEmpty()) {
-            return "Cart is empty";
-        }
+
         orderService.createOrder(user, cartItem);
         cartItemService.deleteCartByUser(user);
-
-        return "Order has been placed. Thank you for purchase, have a nice day";
     }
 }
