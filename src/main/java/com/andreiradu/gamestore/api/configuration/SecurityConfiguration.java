@@ -52,9 +52,9 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers("/", "api/v1/basic-auth").permitAll()
-                                .requestMatchers(HttpMethod.GET, "api/v1/games/**", "api/v1/games/id/*").permitAll()
-                                .requestMatchers("api/v1/users/**").hasAuthority("ADMIN")
+                        authorize.requestMatchers("/", "/api/v1/basic-auth", "/api/v1/register").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/games/**", "/api/v1/games/id/*").permitAll()
+                                .requestMatchers("/api/v1/users/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .logout(LogoutConfigurer::permitAll)
@@ -66,5 +66,4 @@ public class SecurityConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

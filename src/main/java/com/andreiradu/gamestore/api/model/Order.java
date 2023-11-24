@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class Order {
     private User user;
 
     @Column(name = "order_date")
-    private Date orderDate;
+    private LocalDateTime orderDate;
 
     @Column(name = "total_price")
     private float totalPrice;

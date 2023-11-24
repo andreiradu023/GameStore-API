@@ -30,6 +30,12 @@ public class AuthenticationController {
         return new ResponseEntity<>(loginUser, basicHeader, HttpStatus.OK);
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<Void> register(@RequestBody User user) {
+        userService.createUser(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     private HttpHeaders getBasicAuthHeader(User user) {
         String auth = user.getEmail() + ":" + user.getPassword();
         byte[] authBytes = auth.getBytes();

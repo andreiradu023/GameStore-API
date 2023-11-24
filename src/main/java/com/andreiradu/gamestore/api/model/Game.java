@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "games")
@@ -42,9 +42,8 @@ public class Game {
     private String image;
 
     @Column(name = "release_date")
-    private Date releaseDate;
+    private LocalDate releaseDate;
 
     @Column(name = "stock_quantity")
     private int stockQuantity;
-
 }

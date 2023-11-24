@@ -27,7 +27,7 @@ public class UserService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("user not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
     }
 
     public List<User> getAllUser() {
@@ -67,7 +67,7 @@ public class UserService {
                 () -> new ResourceNotFoundException("Customer not found with email: " + email));
     }
 
-    public boolean isEmailUnique(String email) {
+    private boolean isEmailUnique(String email) {
         return userRepository.findUserByEmail(email).isEmpty();
     }
 

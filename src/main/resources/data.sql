@@ -94,11 +94,11 @@ VALUES ('Red Dead Redemption 2', 'PlayStation 4, Xbox One, Google Stadia, Micros
         '93');
 
 INSERT INTO `orders` (`user_id`, `order_date`, `total_price`)
-VALUES (1, '2022-10-29', 109.98),
-       (5, '2023-04-23', 184.98),
-       (2, '2022-12-21', 89),
-       (6, '2023-08-23', 238.98),
-       (9, '2023-05-05', 86.99);
+VALUES (1, '2022-10-29 11:28:03', 109.98),
+       (5, '2023-04-23 15:28:50', 184.98),
+       (2, '2022-12-21 17:28:15', 89),
+       (6, '2023-08-23 21:10:57', 238.98),
+       (9, '2023-05-05 14:28:25', 86.99);
 
 INSERT INTO `order_items` (`order_id`, `game_id`, `quantity`, `unit_price`)
 VALUES (1, 1, 1, 59.99),

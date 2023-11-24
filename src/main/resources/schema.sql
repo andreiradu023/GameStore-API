@@ -37,7 +37,7 @@ CREATE TABLE `games`
     `genre`          VARCHAR(200)  NOT NULL,
     `description`    VARCHAR(4000) NOT NULL,
     `price`          FLOAT         NOT NULL,
-    `image`          VARCHAR(200),
+    `image`          VARCHAR(1000),
     `release_date`   DATE,
     `stock_quantity` INT,
     PRIMARY KEY (`id`)
@@ -47,7 +47,7 @@ CREATE TABLE `orders`
 (
     `id`          BIGINT NOT NULL AUTO_INCREMENT,
     `user_id`     BIGINT,
-    `order_date`  DATE,
+    `order_date`  DATETIME,
     `total_price` FLOAT  NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (user_id) REFERENCES users (id)

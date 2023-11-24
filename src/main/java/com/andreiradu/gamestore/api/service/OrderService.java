@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -54,7 +54,7 @@ public class OrderService {
         Order newOrder = new Order();
         newOrder.setUser(user);
         newOrder.setTotalPrice(calculateTotal(cartItems));
-        newOrder.setOrderDate(new Date());
+        newOrder.setOrderDate(LocalDateTime.now());
         Set<OrderItem> orderItems = newOrder.getOrderItems();
 
         for (CartItem cartItem : cartItems) {

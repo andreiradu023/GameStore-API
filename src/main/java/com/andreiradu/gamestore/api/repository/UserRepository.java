@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
     Optional<User> findUserByEmail(String email);
+
     Page<User> findAllByFirstNameContainsOrLastNameContaining(String firstName, String lastName, Pageable pageable);
 }
